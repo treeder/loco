@@ -1,12 +1,11 @@
-# rend
+# loco
 
-A Node.js renderer using template literals. The beauty of this is that it's so simple and you can just use standard JavaScript interpolation
-and do any kind of JavaScript tricks you want.
+A Node.js localization library, based on @lit/localize, but for server side rendering. 
 
 ## Install
 
 ```sh
-npm install treeder/rend
+npm install treeder/loco
 ```
 
 ## Usage
@@ -14,77 +13,22 @@ npm install treeder/rend
 First make a `layout.js` file with two functions, `header()` and `footer()`:
 
 ```js
-export function header(d) {
-  return `<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>My Rad Site</title>
-</head>
-<body>
-    `
-}
+import { Loco } from 'loco'
+// Initialize:
+let loco = new Loco()
+await loco.addLocale('es', './public/i18n/locales/es.js')
 
-export function footer(d) {
-  return `
-    </body>
-    </html>
-    `
-}
+// then use it anywhere:
+let s = `<div>${loco.msg('Hello', {id: 'hello', locale: 'en'})}</div>`
 ```
 
-Then make an `index.js` file with your body content:
-
-```html
-<h2>Hello ${d.name}!</h2>
-```
-
-Now we send that back in a request.
-
-This is a fastify example, but you can do the same with Express or whatever you like to use. Put the following in `app.js`.
+Or you can use the default Loco instance and do the following:
 
 ```js
-import Fastify from 'fastify'
-import { Rend } from 'rend'
-import { header, footer } from './layout.js'
-import { index } from './index.js'
+import { addLocale, msg } from 'loco'
 
-const fastify = Fastify({
-  logger: true
-})
+await addLocale('es', './public/i18n/locales/es.js')
 
-
-let rend = new Rend({ header, footer })
-
-fastify.get('/', async (request, reply) => {
-    return rend.send(reply, index, {name: 'John Wick'})
-})
-
-
-// Run the server
-const start = async () => {
-  try {
-    await fastify.listen({ port: 3000 })
-  } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-}
-start()
-```
-
-Start it up with `node app.js` and surf to https://localhost:3000. That's it!
-
-
-## Development
-
-To run the example, first install fastify:
-
-```sh
-npm i -g fastify-cli
-```
-
-then:
-
-```sh
-make run
+// then use it anywhere:
+let s = `<div>${msg('Hello', {id: 'hello', locale: 'en'})}</div>`
 ```
