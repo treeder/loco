@@ -10,7 +10,6 @@ export class Loco {
     let localeTemplates = await import(path.join(process.cwd(), file))
     // console.log('localeTemplates', localeTemplates)
     this.localeMap[locale] = localeTemplates.templates
-    console.log('done addLocale')
   }
 
   // eg: msg('Hello', {id: 'hello', locale: 'en'})
