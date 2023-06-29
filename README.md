@@ -2,6 +2,11 @@
 
 A Node.js localization library, based on @lit/localize, but for server side rendering. 
 
+The cool part of how this works is you can use a default language in your code and it will swap out different languages if the keys exist. If they don't, it will use the default so 
+you don't have weird language keys showing up in your interface. 
+
+You can share the same language files between the backend and frontend if you like. 
+
 ## Install
 
 ```sh
@@ -9,8 +14,6 @@ npm install treeder/loco
 ```
 
 ## Usage
-
-First make a `layout.js` file with two functions, `header()` and `footer()`:
 
 ```js
 import { Loco } from 'loco'
