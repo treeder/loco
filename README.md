@@ -1,6 +1,6 @@
 # loco
 
-A Node.js localization library, based on @lit/localize, but for server side rendering. 
+A Node.js localization library, based on [@lit/localize](https://lit.dev/docs/localization/overview/), but for server side rendering. And you can use the same file for both the server side and client side! :boom: 
 
 The cool part of how this works is you can use a default language in your code and it will swap out different languages if the keys exist. If they don't, it will use the default so 
 you don't have weird language keys showing up in your interface. 
