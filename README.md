@@ -35,3 +35,5 @@ await addLocale('es', './public/i18n/locales/es.js')
 // then use it anywhere:
 let s = `<div>${msg('Hello', {id: 'hello', locale: 'en'})}</div>`
 ```
+
+...
